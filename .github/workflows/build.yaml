@@ -3,10 +3,9 @@ name: Build kubeplay packages
 
 on:
   push:
-    tag:
-      - 'v*'
-  schedule:
-    - cron: '56 */1 * * *'
+    branches:
+      - 'action'
+
 
 env:
   IMAGE_REGISTRY: "ghcr.io"
