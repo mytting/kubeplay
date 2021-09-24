@@ -3,7 +3,7 @@ name: Build kubeplay packages
 
 on:
   push:
-    tag:
+    branches:
       - 'v*'
 
 env:
