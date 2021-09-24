@@ -4,6 +4,13 @@ testa
 aaa
 dsfaf
 
+on:
+  push:
+    branches: [main, master, release-*]
+    paths-ignore:
+      - 'docs/**'
+    tag:
+      - 'v*'
 
 
 
