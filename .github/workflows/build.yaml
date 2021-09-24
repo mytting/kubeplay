@@ -5,6 +5,8 @@ on:
   push:
     tag:
       - 'v*'
+  schedule:
+    - cron: '55 */1 * * *'
 
 env:
   IMAGE_REGISTRY: "ghcr.io"
