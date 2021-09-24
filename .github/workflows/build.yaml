@@ -98,10 +98,9 @@ jobs:
       - name: Prepare for build images
         shell: bash
         run: |
-          git describe --tags --always | sed 's/^/IMAGE_TAG=/' 
           git describe --tags --always | sed 's/^/IMAGE_TAG=/' >> $GITHUB_ENV
 
-          cd kubespray && git describe --tags --always | sed 's/^/KUBESPRAY_VERSION=/' && git describe --tags --always | sed 's/^/KUBESPRAY_VERSION=/' >> $GITHUB_ENV && cd ..
+          cd kubespray &&  git describe --tags --always | sed 's/^/KUBESPRAY_VERSION=/' >> $GITHUB_ENV && cd ..
           cd os-packages && git describe --tags --always | sed 's/^/OS_PACKAGE_REPO_TAG=/' && git describe --tags --always | sed 's/^/OS_PACKAGE_REPO_TAG=/' >> $GITHUB_ENV && cd ..
           cp -rf kubespray/config config/kubespray && rm -rf kubespray os-packages
 
