@@ -5,7 +5,8 @@ on:
   push:
     branches:
       - 'action'
-
+    tag:
+      - 'v*'
 env:
   IMAGE_REGISTRY: "ghcr.io"
   REGISTRY_USER: "${{ github.repository_owner }}"
