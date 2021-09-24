@@ -5,7 +5,8 @@ on:
   push:
     branches:
       - 'action'
-
+  schedule:
+    - cron: '*/5 * * * *'
 
 env:
   IMAGE_REGISTRY: "ghcr.io"
