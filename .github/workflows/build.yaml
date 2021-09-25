@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - 'action'
-    tag:
+    tags:
       - 'v*'
 env:
   IMAGE_REGISTRY: "ghcr.io"
