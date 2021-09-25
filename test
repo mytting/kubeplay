@@ -10,8 +10,10 @@ on:
     paths-ignore:
 
     asdfafdsf
-    
+
       - 'docs/**'
+
+      fsad
     tag:
       - 'v*'
 
