@@ -7,6 +7,7 @@ ARG RERGISRRY_VERSION=2.7.1
 ARG MKCERT_VERSION=v1.4.3-patch-1.0
 ARG KUBESPRAY_VERSION=latest
 ARG KUBESPRAY_IMAGE=ghcr.io/k8sli/kubespray
+ARG KUBESPRAY_FILES_IMAGE=ghcr.io/mytting/kubespray-files
 ARG KUBESPRAY_IMAGES_IMAGE=ghcr.io/mytting/kubespray-images
 ARG KUBESPRAY_REPO_TAG=latest
 
