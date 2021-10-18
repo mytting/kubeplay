@@ -129,8 +129,8 @@ jobs:
             RERGISRRY_VERSION=${{ env.RERGISRRY_VERSION }}
             KUBESPRAY_IMAGE=${{ env.KUBESPRAY_IMAGE }}
             KUBESPRAY_VERSION=${{ env.KUBESPRAY_VERSION }}
-            OS_PACKAGES_IMAGE=${{OS_PACKAGES_IMAGE}}
-            OS_PACKAGE_REPO_TAG=${{OS_PACKAGE_REPO_TAG}}
+            OS_PACKAGES_IMAGE=${{ env.OS_PACKAGES_IMAGE }}
+            OS_PACKAGE_REPO_TAG=${{ env.OS_PACKAGE_REPO_TAG }}
           outputs: type=local,dest=./
 
       - name: Prepare for upload package
