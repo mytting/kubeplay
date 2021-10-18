@@ -34,6 +34,8 @@ FROM scratch
 COPY . .
 COPY --from=downloader /tools /resources/nginx/tools
 COPY --from=downloader /images /resources/images
+
+## 这段直接写到这里 github action无法运行，会中断，所以此处通过 workflow中的echo 写进来
 ## COPY --from=${OS_PACKAGES_IMAGE}:${OS_PACKAGE_REPO_TAG} / /resources/nginx
 ## COPY --from=${KUBESPRAY_FILES_IMAGE}:${KUBESPRAY_VERSION} / /resources/nginx
 ## COPY --from=${KUBESPRAY_IMAGES_IMAGE}:${KUBESPRAY_VERSION} / /resources/registry

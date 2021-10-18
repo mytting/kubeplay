@@ -84,6 +84,7 @@ jobs:
 
           source $GITHUB_ENV
           echo "" >> Dockerfile
+          ##### 这段直接写到Dockerfile里面会报错 echo进去却没有问题
           echo "COPY --from=${IMAGE_REPO}/${{ matrix.image_name }}:${OS_PACKAGE_REPO_TAG} / /" >> Dockerfile
           echo "COPY --from=${KUBESPRAY_FILES_IMAGE}:${KUBESPRAY_VERSION} / /resources/nginx" >> Dockerfile
           echo "COPY --from=${KUBESPRAY_IMAGES_IMAGE}:${KUBESPRAY_VERSION} / /resources/registry" >> Dockerfile
