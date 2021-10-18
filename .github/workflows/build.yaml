@@ -94,6 +94,7 @@ jobs:
           # if [[ ${{ matrix.package_name }} == "resources" ]]; then
           #   echo -e "FROM scratch\nCOPY --from=${IMAGE_REPO}/${{ matrix.image_name }}:${OS_PACKAGE_REPO_TAG} / /" > Dockerfile
           # fi
+          cat Dockerfile
 
       - name: Build kubeplay image to local
         uses: docker/build-push-action@v2
@@ -104,8 +105,10 @@ jobs:
           build-args: |
             NGINX_VERSION=${{ env.NGINX_VERSION }}
             RERGISRRY_VERSION=${{ env.RERGISRRY_VERSION }}
+            KUBESPRAY_FILES_IMAGE=${{ env.KUBESPRAY_FILES_IMAGE }}
             KUBESPRAY_IMAGE=${{ env.KUBESPRAY_IMAGE }}
             KUBESPRAY_VERSION=${{ env.KUBESPRAY_VERSION }}
+            KUBESPRAY_IMAGES_IMAGE=${{ env.KUBESPRAY_IMAGES_IMAGE }}
             OS_PACKAGES_IMAGE=${{ env.OS_PACKAGES_IMAGE }}
             OS_PACKAGE_REPO_TAG=${{ env.OS_PACKAGE_REPO_TAG }}
           outputs: type=local,dest=./
