@@ -16,6 +16,7 @@ env:
   KUBEPLAY_IMAGE_REPO: "ghcr.io/${{ github.repository_owner }}/kubeplay"
   KUBESPRAY_FILES_IMAGE: "ghcr.io/${{ github.repository_owner }}/kubespray-files"
   KUBESPRAY_IMAGES_IMAGE: "ghcr.io/${{ github.repository_owner }}/kubespray-images"
+  OS_PACKAGES_IMAGE: "ghcr.io/${{ github.repository_owner }}/os-packages-all-os"
 
 jobs:
   build-package:
@@ -128,6 +129,8 @@ jobs:
             RERGISRRY_VERSION=${{ env.RERGISRRY_VERSION }}
             KUBESPRAY_IMAGE=${{ env.KUBESPRAY_IMAGE }}
             KUBESPRAY_VERSION=${{ env.KUBESPRAY_VERSION }}
+            OS_PACKAGES_IMAGE=${{OS_PACKAGES_IMAGE}}
+            OS_PACKAGE_REPO_TAG=${{OS_PACKAGE_REPO_TAG}}
           outputs: type=local,dest=./
 
       - name: Prepare for upload package
