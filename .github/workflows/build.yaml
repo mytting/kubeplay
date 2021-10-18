@@ -109,6 +109,7 @@ jobs:
             KUBESPRAY_IMAGE=${{ env.KUBESPRAY_IMAGE }}
             KUBESPRAY_VERSION=${{ env.KUBESPRAY_VERSION }}
             KUBESPRAY_IMAGES_IMAGE=${{ env.KUBESPRAY_IMAGES_IMAGE }}
+            KUBESPRAY_REPO_TAG=${{ env.KUBESPRAY_VERSION }}
             OS_PACKAGES_IMAGE=${{ env.OS_PACKAGES_IMAGE }}
             OS_PACKAGE_REPO_TAG=${{ env.OS_PACKAGE_REPO_TAG }}
           outputs: type=local,dest=./
