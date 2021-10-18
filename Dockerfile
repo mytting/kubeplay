@@ -31,6 +31,6 @@ FROM scratch
 COPY . .
 COPY --from=downloader /tools /resources/nginx/tools
 COPY --from=downloader /images /resources/images
-# COPY --from=${OS_PACKAGES_IMAGE}:${OS_PACKAGE_REPO_TAG} / /resources/nginx
-# COPY --from=${KUBESPRAY_FILES_IMAGE}:${KUBESPRAY_REPO_TAG} / /resources/nginx
-# COPY --from=${KUBESPRAY_IMAGES_IMAGE}:${KUBESPRAY_REPO_TAG} / /resources/registry
+COPY --from=${OS_PACKAGES_IMAGE}:${OS_PACKAGE_REPO_TAG} / /resources/nginx
+COPY --from=${KUBESPRAY_FILES_IMAGE}:${KUBESPRAY_REPO_TAG} / /resources/nginx
+COPY --from=${KUBESPRAY_IMAGES_IMAGE}:${KUBESPRAY_REPO_TAG} / /resources/registry
