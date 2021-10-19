@@ -21,26 +21,27 @@
 
 ### Version of addons
 
-| addon        | version        | usage                           |
-| ------------ | -------------- | ------------------------------- |
-| kubernetes   | v1.21.4        | kubernetes                      |
-| containerd   | v1.4.6         | container runtime               |
-| etcd         | v3.4.13        | etcd service                    |
-| crictl       | v1.21.0        | CRI CLI tool                    |
-| pause        | 3.3            | pause container image           |
-| cni-plugins  | v0.9.1         | CNI plugins                     |
-| calico       | v3.18.5        | calico                          |
-| autoscaler   | 1.8.3          | DNS auto scaling                |
-| coredns      | v1.8.0         | cluster DNS service             |
-| flannel      | v0.14.0        | flannel                         |
-| cilium       | v1.9.10        | cilium                          |
-| nginx        | 1.19           | reverse proxy of APIserver      |
-| canal        | calico/flannel | calico and flannel intergration |
-| helm         | v3.6.3         | helm CLI tool                   |
-| nerdctl      | 0.8.0          | containerd CLI tool             |
-| nerdctl-full | 0.11.0         | containerd toolset              |
-| registry     | v2.7.1         | container image registry        |
-| skopeo       | v1.4.0         | image porting tool              |
+| addon          | version        | usage                           |
+| ------------   | -------------- | ------------------------------- |
+| kubernetes     | v1.21.4        | kubernetes                      |
+| containerd     | v1.4.6         | container runtime               |
+| etcd           | v3.4.13        | etcd service                    |
+| crictl         | v1.21.0        | CRI CLI tool                    |
+| pause          | 3.3            | pause container image           |
+| cni-plugins    | v0.9.1         | CNI plugins                     |
+| calico         | v3.18.5        | calico                          |
+| autoscaler     | 1.8.3          | DNS auto scaling                |
+| coredns        | v1.8.0         | cluster DNS service             |
+| dns-node-cache | 1.17.1         | Node  dns cache                 |
+| flannel        | v0.14.0        | flannel                         |
+| cilium         | v1.9.10        | cilium                          |
+| nginx          | 1.19           | reverse proxy of APIserver      |
+| canal          | calico/flannel | calico and flannel intergration |
+| helm           | v3.6.3         | helm CLI tool                   |
+| nerdctl        | 0.8.0          | containerd CLI tool             |
+| nerdctl-full   | 0.11.0         | containerd toolset              |
+| registry       | v2.7.1         | container image registry        |
+| skopeo         | v1.4.0         | image porting tool              |
 
 ### Supported Linux Distributions
 
