@@ -27,7 +27,31 @@ jobs:
         include:
           - name: os-packages
             image_name: os-packages-all-os
-            package_name: kubeplay-offline-resources
+            package_name: resources
+          - name: centos-7
+            image_name: os-packages-centos7
+            package_name: kubeplay
+          - name: centos-8
+            image_name: os-packages-centos8
+            package_name: kubeplay
+          - name: fedora-33
+            image_name: os-packages-fedora33
+            package_name: kubeplay
+          - name: fedora-34
+            image_name: os-packages-fedora34
+            package_name: kubeplay
+          - name: debian-9
+            image_name: os-packages-debian9
+            package_name: kubeplay
+          - name: debian-10
+            image_name: os-packages-debian10
+            package_name: kubeplay
+          - name: ubuntu-1804
+            image_name: os-packages-ubuntu1804
+            package_name: kubeplay
+          - name: ubuntu-2004
+            image_name: os-packages-ubuntu2004
+            package_name: kubeplay
 
     steps:
       - name: Checkout
@@ -92,9 +116,9 @@ jobs:
           sed -n 's|image: nginx:|NGINX_VERSION=|p' compose.yaml | tr -d ' ' >> $GITHUB_ENV
           sed -n 's|image: registry:|RERGISRRY_VERSION=|p' compose.yaml | tr -d ' ' >> $GITHUB_ENV
 
-          # if [[ ${{ matrix.package_name }} == "resources" ]]; then
-          #   echo -e "FROM scratch\nCOPY --from=${IMAGE_REPO}/${{ matrix.image_name }}:${OS_PACKAGE_REPO_TAG} / /" > Dockerfile
-          # fi
+          if [[ ${{ matrix.package_name }} == "resources" ]]; then
+            echo -e "FROM scratch\nCOPY --from=${IMAGE_REPO}/${{ matrix.image_name }}:${OS_PACKAGE_REPO_TAG} / /" > Dockerfile
+          fi
           cat Dockerfile
 
       - name: Build kubeplay image to local
