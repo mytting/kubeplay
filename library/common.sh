@@ -201,9 +201,9 @@ common::run_kubespray(){
   infolog "进入后台安装，可以ctrl-C退出"
   infolog "进入后台安装，可以ctrl-C退出"
   sleep 3
-  infolog "如果log停止，可以自行退出重新输入'nerdctl logs -f kubespray-runne'查看日志"
-  infolog "如果log停止，可以自行退出重新输入'nerdctl logs -f kubespray-runne'查看日志"
-  infolog "如果log停止，可以自行退出重新输入'nerdctl logs -f kubespray-runne'查看日志"
+  infolog "如果log停止，可以自行退出重新输入'nerdctl logs -f kubespray-runner'查看日志"
+  infolog "如果log停止，可以自行退出重新输入'nerdctl logs -f kubespray-runner'查看日志"
+  infolog "如果log停止，可以自行退出重新输入'nerdctl logs -f kubespray-runner'查看日志"
   sleep 3
   nerdctl logs -f kubespray-runner
 }
