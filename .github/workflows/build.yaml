@@ -108,7 +108,7 @@ jobs:
 
           source $GITHUB_ENV
           echo "" >> Dockerfile
-          ##### 这段直接写到Dockerfile里面会报错 echo进去却没有问题
+          ##### 这段直接写到Dockerfile里面会报错,因为FROM image不允许大写字母，通过echo，echo进去的时候可以直接把变量替换，而不是把大写变量写到Dockerfile里面
           echo "COPY --from=${IMAGE_REPO}/${{ matrix.image_name }}:${OS_PACKAGE_REPO_TAG} / /" >> Dockerfile
           echo "COPY --from=${KUBESPRAY_FILES_IMAGE}:${KUBESPRAY_VERSION} / /resources/nginx" >> Dockerfile
           echo "COPY --from=${KUBESPRAY_IMAGES_IMAGE}:${KUBESPRAY_VERSION} / /resources/registry" >> Dockerfile
