@@ -104,7 +104,9 @@ jobs:
 
           cd kubespray &&  git describe --tags --always | sed 's/^/KUBESPRAY_VERSION=/' >> $GITHUB_ENV && cd ..
           cd os-packages && git describe --tags --always | sed 's/^/OS_PACKAGE_REPO_TAG=/' && git describe --tags --always | sed 's/^/OS_PACKAGE_REPO_TAG=/' >> $GITHUB_ENV && cd ..
-          cp -rf kubespray/config config/kubespray && rm -rf kubespray os-packages
+          cp -rf kubespray/config config/kubespray && rm -rf  os-packages
+          git checkout ${KUBESPRAY_VERSION}
+          rm -f -r kubespray/.git
 
           source $GITHUB_ENV
           echo "" >> Dockerfile
