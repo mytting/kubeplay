@@ -195,6 +195,7 @@ common::run_kubespray(){
   : ${KUBESPRAY_IMAGE:=$(nerdctl images | awk '{print $1":"$2}' | grep '^kubespray:*' | sort -r --version-sort | head -n1)}
   nerdctl rm -f kubespray-runner >/dev/null 2>&1 || true
   nerdctl run -d --net=host --name kubespray-runner \
+   -v ${KUBESPRAYDIR}:/kubespray \
   -v ${KUBESPRAY_CONFIG_DIR}:/kubespray/config \
   ${KUBESPRAY_IMAGE} $1
   infolog "进入后台安装，可以ctrl-C退出"

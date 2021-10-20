@@ -14,6 +14,7 @@ ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
 
 # Define glob variables
 KUBE_ROOT="$(cd "$(dirname "$0")" && pwd)"
+KUBESPRAYDIR="${KUBE_ROOT}/kubespray"
 CERTS_DIR="${KUBE_ROOT}/config/certs"
 CONFIG_FILE="${KUBE_ROOT}/config.yaml"
 CA_CONFIGFILE="${KUBE_ROOT}/config/rootCA.cnf"
