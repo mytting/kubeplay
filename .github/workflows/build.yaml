@@ -5,8 +5,11 @@ on:
   push:
     branches:
       - 'action'
+      - 'release-*'
+      - 'main'
     tags:
       - 'v*'
+      - 'release-*'
 env:
   IMAGE_REGISTRY: "ghcr.io"
   REGISTRY_USER: "${{ github.repository_owner }}"
