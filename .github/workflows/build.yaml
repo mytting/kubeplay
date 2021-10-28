@@ -3,13 +3,17 @@ name: Build kubeplay packages
 
 on:
   push:
-    branches:
-      - 'action'
-      - 'release-*'
-      - 'main'
     tags:
       - 'v*'
+      - 'rc-*'
+      - 'beta-*'
       - 'release-*'
+    branches: 
+      - 'main' 
+      - 'beta-*'
+      - 'release-*'
+      - 'master' 
+      - 'action'
 env:
   IMAGE_REGISTRY: "ghcr.io"
   REGISTRY_USER: "${{ github.repository_owner }}"
