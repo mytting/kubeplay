@@ -4,7 +4,7 @@ compose:
   # Nginx http server bind port for download files and packages
   nginx_http_port: 8080
   # Registry domain for CRI runtime download images
-  registry_domain: kube.registry.local
+  registry_domain: kube.registry.local:8081
 
 kubespray:
   # Kubernetes version by default, only support v1.20.6
