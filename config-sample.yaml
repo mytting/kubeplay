@@ -4,6 +4,7 @@ compose:
   # Nginx http server bind port for download files and packages
   nginx_http_port: 8080
   # Registry domain for CRI runtime download images
+  ### 可以修改前面的域名，后面的端口不可以修改
   registry_domain: kube.registry.local:8081
 
 kubespray:
