@@ -314,8 +314,7 @@ The following default parameters are not recommended to be modified without spec
 | offline_resources_enabled     | whether to deploy offline                                    |  true   |
 | generate_domain_crt           | whether to generate self-signed certificate for mirror repository domain |  true   |
 | image_repository              | repo or project of image registry                            | library |
-| registry_https_port           | port of registry，PUSH operation disabled                    |   443   |
-| registry_push_port            | port of registry for PUSH                                    |  5000   |
+| registry_https_port           | port of registry                                             |   8081  |
 | download_container            | whether to pull images of all components under all nodes     |  false  |
 | cilium_enable_hubble          | enable support hubble in cilium                              |  false  |
 | cilium_hubble_install         | install hubble-relay, hubble-ui                              |  false  |

@@ -6,7 +6,7 @@ remove::remove_cluster(){
 
 remove::cleanup(){
   # Remove registry domain form /etc/hosts
-  sed -i "/${REGISTRY_DOMAIN}/d" /etc/hosts
+  sed -i "/${IMAGEREPO_DOMAIN}/d" /etc/hosts
   mkcert -uninstall
   # Remove binary tools file
   rm -f ${USR_BIN_PATH}/{kubectl,helm,yq,mkcert,skopeo}

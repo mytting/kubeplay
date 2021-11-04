@@ -74,15 +74,14 @@ common::rudder_config(){
   fi
 
   NGINX_HTTP_PORT=$(yq eval '.compose.nginx_http_port' ${CONFIG_FILE})
-  REGISTRY_DOMAIN=$(yq eval '.compose.registry_domain' ${CONFIG_FILE})
+  IMAGEREPO_DOMAIN=$(yq eval '.compose.imagerepo_domain' ${CONFIG_FILE})
   NGINX_HTTP_URL="http://${INTERNAL_IP}:${NGINX_HTTP_PORT}"
 
   IMAGE_REPO=$(yq eval '.default.image_repository' ${CONFIG_FILE})
   GENERATE_DOMAIN_CRT=$(yq eval '.default.generate_domain_crt' ${CONFIG_FILE})
-  REGISTRY_HTTPS_PORT=$(yq eval '.default.registry_https_port' ${CONFIG_FILE})
-  REGISTRY_PUSH_PORT=$(yq eval '.default.registry_push_port' ${CONFIG_FILE})
-  REGISTRY_HTTPS_URL="https://${REGISTRY_DOMAIN}:${REGISTRY_HTTPS_PORT}"
-  PUSH_REGISTRY="127.0.0.1:${REGISTRY_PUSH_PORT}"
+  REGISTRY_HTTPS_PORT=$(yq eval '.compose.registry_https_port' ${CONFIG_FILE})
+  REGISTRY_HTTPS_URL="https://${IMAGEREPO_DOMAIN}:${REGISTRY_HTTPS_PORT}"
+  PUSH_REGISTRY="${IMAGEREPO_DOMAIN}:${REGISTRY_HTTPS_PORT}"
 
   OFFLINE_RESOURCES_URL=$(yq -e eval '.default.offline_resources_url' ${CONFIG_FILE})
   if [[ "${OFFLINE_RESOURCES_URL}" == "internal_ip:nginx_http_port" ]]; then
@@ -102,10 +101,14 @@ common::rudder_config(){
     registry_ip=${INTERNAL_IP} yq eval --inplace '.default.registry_ip = strenv(registry_ip)' ${CONFIG_FILE}
   fi
 
+  REGISTRY_DOMAIN=$(yq -e eval '.default.registry_domain' ${CONFIG_FILE})
+  if [[ ${REGISTRY_DOMAIN} == "imagerepo_domain:registry_https_port" ]]; then
+    REGISTRY_DOMAIN="${IMAGEREPO_DOMAIN}:${REGISTRY_HTTPS_PORT}"
+    registry_domain="${REGISTRY_DOMAIN}" yq eval --inplace '.default.registry_domain = strenv(registry_domain)' ${CONFIG_FILE}
+  fi
   # Update compose.yaml nginx ports filed
-  nginx_http_port="${NGINX_HTTP_PORT}:8080" yq eval --inplace '.services.nginx.ports[0] = strenv(nginx_http_port)' ${COMPOSE_YAML_FILE}
-  registry_https_port="${REGISTRY_HTTPS_PORT}:443" yq eval --inplace '.services.nginx.ports[1] = strenv(registry_https_port)' ${COMPOSE_YAML_FILE}
-  registry_push_port="${PUSH_REGISTRY}:5000" yq eval --inplace '.services.registry.ports[0] = strenv(registry_push_port)' ${COMPOSE_YAML_FILE}
+  nginx_http_port="${NGINX_HTTP_PORT}:8080" yq eval --inplace '.services.kubeplay-nginx.ports[0] = strenv(nginx_http_port)' ${COMPOSE_YAML_FILE}
+  registry_https_port="${REGISTRY_HTTPS_PORT}:5000" yq eval --inplace '.services.kubeplay-registry.ports[0] = strenv(registry_https_port)' ${COMPOSE_YAML_FILE}
 
   # Generate kubespray's env.yaml and inventory file
   yq eval '.default' ${CONFIG_FILE} > ${KUBESPRAY_CONFIG_DIR}/env.yml
@@ -120,9 +123,9 @@ common::generate_domain_certs(){
     local DOMAIN=$(echo ${REGISTRY_DOMAIN} | sed 's/[^.]*./*./')
     rm -rf ${CERTS_DIR} ${RESOURCES_NGINX_DIR}/certs
     mkdir -p ${CERTS_DIR} ${RESOURCES_NGINX_DIR}/certs
-    infolog "Generating TLS cert for domain: ${REGISTRY_DOMAIN}"
+    infolog "Generating TLS cert for domain: ${IMAGEREPO_DOMAIN}"
     CAROOT=${CERTS_DIR} mkcert -install
-    CAROOT=${CERTS_DIR} mkcert -key-file ${CERTS_DIR}/domain.key -cert-file ${CERTS_DIR}/domain.crt ${REGISTRY_DOMAIN} ${DOMAIN} 
+    CAROOT=${CERTS_DIR} mkcert -key-file ${CERTS_DIR}/domain.key -cert-file ${CERTS_DIR}/domain.crt ${IMAGEREPO_DOMAIN} ${DOMAIN} 
 
     # Copy domain.crt, domain.key to nginx certs directory
     infolog "Copy certs to ${COMPOSE_CONFIG_DIR}"
@@ -132,8 +135,8 @@ common::generate_domain_certs(){
 
 # Add registry domain with ip to /etc/hosts file
 common::update_hosts(){
-  sed -i "/${REGISTRY_DOMAIN}/d" /etc/hosts
-  echo "${INTERNAL_IP} ${REGISTRY_DOMAIN}" >> /etc/hosts
+  sed -i "/${IMAGEREPO_DOMAIN}/d" /etc/hosts
+  echo "${INTERNAL_IP} ${IMAGEREPO_DOMAIN}" >> /etc/hosts
 }
 
 # Load all docker archive images
@@ -146,8 +149,8 @@ common::load_images(){
     fi
   done
   : ${KUBESPRAY_IMAGE:=$(nerdctl images | awk '{print $1":"$2}' | grep '^kubespray:*' | sort -r --version-sort | head -n1)}
-  kubespray_image="${REGISTRY_DOMAIN}/${IMAGE_REPO}/${KUBESPRAY_IMAGE}" yq eval --inplace '.default.kubespray_image = strenv(kubespray_image)' ${CONFIG_FILE}
-  kubespray_image="${REGISTRY_DOMAIN}/${IMAGE_REPO}/${KUBESPRAY_IMAGE}" yq eval --inplace '.kubespray_image = strenv(kubespray_image)' ${KUBESPRAY_CONFIG_DIR}/env.yml
+  kubespray_image="${IMAGEREPO_DOMAIN}/${IMAGE_REPO}/${KUBESPRAY_IMAGE}" yq eval --inplace '.default.kubespray_image = strenv(kubespray_image)' ${CONFIG_FILE}
+  kubespray_image="${IMAGEREPO_DOMAIN}/${IMAGE_REPO}/${KUBESPRAY_IMAGE}" yq eval --inplace '.kubespray_image = strenv(kubespray_image)' ${KUBESPRAY_CONFIG_DIR}/env.yml
 }
 
 common::compose_up(){

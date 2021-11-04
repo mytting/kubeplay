@@ -4,8 +4,8 @@ compose:
   # Nginx http server bind port for download files and packages
   nginx_http_port: 8080
   # Registry domain for CRI runtime download images
-  ### 可以修改前面的域名，后面的端口不可以修改
-  registry_domain: kube.registry.local:8081
+  imagerepo_domain: kube.registry.local
+  registry_https_port: 8081
 
 kubespray:
   # Kubernetes version by default, only support v1.20.6
@@ -77,6 +77,8 @@ default:
   registry_ip: internal_ip
   # Offline resource url for download files, default is internal_ip:nginx_http_port
   offline_resources_url: internal_ip:nginx_http_port
+
+  registry_domain: imagerepo_domain:registry_https_port
   # Use nginx and registry provide all offline resources
   offline_resources_enabled: true
   # Image repo in registry
@@ -85,10 +87,6 @@ default:
   kubespray_image: "kubespray"
   # Auto generate self-signed certificate for registry domain
   generate_domain_crt: true
-  # For nodes pull image, use 443 as default
-  registry_https_port: 8081
-  # For push image to this registry, use 5000 as default, and only bind at 127.0.0.1
-  registry_push_port: 8081
   # Set false to disable download all container images on all nodes
   download_container: false
 
@@ -100,3 +98,4 @@ default:
   cilium_hubble_tls_generate: false
   # Kube Proxy Replacement mode (strict/probe/partial)
   cilium_kube_proxy_replacement: probe
+

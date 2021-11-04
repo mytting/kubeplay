@@ -81,11 +81,12 @@ $ vi config.yaml
 
 #### compose
 
-| 参数            | 说明                             | 示例                |
-| --------------- | -------------------------------- | ------------------- |
-| internal_ip     | 部署节点内网访问 IP              | 192.168.10.11       |
-| nginx_http_port | 部署 nginx 服务暴露的端口        | 8080                |
-| registry_domain | 部署 registry 镜像仓库服务的域名 | kube.registry.local |
+| 参数                   | 说明                             | 示例                 |
+| --------------------- | -------------------------------- |  ------------------ |
+| internal_ip           | 部署节点内网访问 IP                 | 192.168.10.11       |
+| nginx_http_port       | 部署 nginx 服务暴露的端口           | 8080                 |
+| imagerepo_domain      | 部署 registry 镜像仓库服务的域名     | kube.registry.local  |
+| registry_https_port   | 镜像仓库的端口号                    |   8081               |
 
 ```yaml
 compose:
@@ -94,7 +95,7 @@ compose:
   # Nginx http server bind port for download files and packages
   nginx_http_port: 8080
   # Registry domain for CRI runtime download images
-  registry_domain: kube.registry.local
+  imagerepo_domain: kube.registry.local
 ```
 
 #### kubespray
@@ -304,7 +305,6 @@ inventory: |
 | offline_resources_enabled     | 是否为离线部署                           |  true   |
 | generate_domain_crt           | 是否为镜像仓库域名生成自签证书           |  true   |
 | image_repository              | 镜像仓库的 repo 或 project               | library |
-| registry_https_port           | 镜像仓库的端口号，该端口已禁止 PUSH 镜像 |   443   |
 | registry_push_port            | 用于 PUSH 镜像的 registry 端口号         |  5000   |
 | download_container            | 是否在所有节点 pull 下所有组件的镜像     |  false  |
 | cilium_enable_hubble          | cilium 中是否开启 hubble                 |  false  |
