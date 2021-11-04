@@ -86,9 +86,9 @@ default:
   # Auto generate self-signed certificate for registry domain
   generate_domain_crt: true
   # For nodes pull image, use 443 as default
-  registry_https_port: 443
+  registry_https_port: 8081
   # For push image to this registry, use 5000 as default, and only bind at 127.0.0.1
-  registry_push_port: 5000
+  registry_push_port: 8081
   # Set false to disable download all container images on all nodes
   download_container: false
 
