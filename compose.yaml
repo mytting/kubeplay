@@ -1,7 +1,7 @@
 version: '3.1'
 services:
-  nginx:
-    container_name: nginx
+  kubeplay-nginx:
+    container_name: kubeplay-nginx
     # use alpine's nginx image alternative debian base, more info at:
     # https://stackoverflow.com/questions/31833583/nginx-gives-an-internal-server-error-500-after-i-have-configured-basic-auth
     image: nginx:1.20-alpine
@@ -12,9 +12,9 @@ services:
     ports:
       - 8080:8080
 
-  registry:
+  kubeplay-registry:
     image: registry:2.7.1
-    container_name: registry
+    container_name: kubeplay-registry
     restart: always
     volumes:
       - ./resources/registry:/var/lib/registry
