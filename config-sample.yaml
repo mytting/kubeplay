@@ -7,6 +7,8 @@ compose:
   imagerepo_domain: kube.registry.local
   registry_https_port: 8081
 
+  ##自定义k8s的数据目录，可以单独挂一块盘到这个目录
+  data_dir: /opt
 kubespray:
   # Kubernetes version by default, only support v1.20.6
   kube_version: v1.21.5
