@@ -6,20 +6,18 @@ services:
     # https://stackoverflow.com/questions/31833583/nginx-gives-an-internal-server-error-500-after-i-have-configured-basic-auth
     image: nginx:1.20-alpine
     restart: always
+    network_mode: host
     volumes:
       - ./resources/nginx:/usr/share/nginx
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - 8080:8080
 
   kubeplay-registry:
     image: registry:2.7.1
     container_name: kubeplay-registry
     restart: always
+    network_mode: host
     volumes:
       - ./resources/registry:/var/lib/registry
       - ./config/registry.yaml:/etc/docker/registry/config.yml
       - ./config/certs/domain.crt:/etc/docker/registry/domain.crt
       - ./config/certs/domain.key:/etc/docker/registry/domain.key
-    ports:
-      - 8081:5000

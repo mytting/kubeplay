@@ -25,6 +25,8 @@ OUTPUT_ENV_FILE="${KUBE_ROOT}/.install-env.sh"
 RESOURCES_NGINX_DIR="${KUBE_ROOT}/resources/nginx"
 KUBESPRAY_CONFIG_DIR="${KUBE_ROOT}/config/kubespray"
 INSTALL_STEPS_FILE="${KUBESPRAY_CONFIG_DIR}/.install_steps"
+NGINX_CONFIG_FILE="${KUBE_ROOT}/config/nginx.conf"
+REGISTRY_CONFIG_FILE="${KUBE_ROOT}/config/registry.yaml"
 
 # Include all functions from library/*.sh
 for file in ${KUBE_ROOT}/library/*.sh; do source ${file}; done

@@ -106,9 +106,9 @@ common::rudder_config(){
     REGISTRY_DOMAIN="${IMAGEREPO_DOMAIN}:${REGISTRY_HTTPS_PORT}"
     registry_domain="${REGISTRY_DOMAIN}" yq eval --inplace '.default.registry_domain = strenv(registry_domain)' ${CONFIG_FILE}
   fi
-  # Update compose.yaml nginx ports filed
-  nginx_http_port="${NGINX_HTTP_PORT}:8080" yq eval --inplace '.services.kubeplay-nginx.ports[0] = strenv(nginx_http_port)' ${COMPOSE_YAML_FILE}
-  registry_https_port="${REGISTRY_HTTPS_PORT}:5000" yq eval --inplace '.services.kubeplay-registry.ports[0] = strenv(registry_https_port)' ${COMPOSE_YAML_FILE}
+  # Update config file nginx and registry ports filed
+  sed -i "s|NGINX_PORT|${NGINX_HTTP_PORT}|g" ${NGINX_CONFIG_FILE}
+  registry_https_port=":${REGISTRY_HTTPS_PORT}" yq eval --inplace '.http.addr =  strenv(registry_https_port)' ${REGISTRY_CONFIG_FILE}
 
   # Generate kubespray's env.yaml and inventory file
   yq eval '.default' ${CONFIG_FILE} > ${KUBESPRAY_CONFIG_DIR}/env.yml
