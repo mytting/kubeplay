@@ -120,7 +120,7 @@ common::rudder_config(){
 # Generate registry domain cert
 common::generate_domain_certs(){
   if [[ ${GENERATE_DOMAIN_CRT} == "true" ]]; then
-    local DOMAIN=$(echo ${REGISTRY_DOMAIN} | sed 's/[^.]*./*./')
+    local DOMAIN=$(echo ${IMAGEREPO_DOMAIN} | sed 's/[^.]*./*./')
     rm -rf ${CERTS_DIR} ${RESOURCES_NGINX_DIR}/certs
     mkdir -p ${CERTS_DIR} ${RESOURCES_NGINX_DIR}/certs
     infolog "Generating TLS cert for domain: ${IMAGEREPO_DOMAIN}"
