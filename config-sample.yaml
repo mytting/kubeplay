@@ -7,8 +7,6 @@ compose:
   imagerepo_domain: kube.registry.local
   registry_https_port: 8081
 
-  ##自定义k8s的数据目录，可以单独挂一块盘到这个目录
-  data_dir: /opt
 kubespray:
   # Kubernetes version by default, only support v1.20.6
   kube_version: v1.21.5
@@ -26,6 +24,15 @@ kubespray:
   # Settings for etcd event server
   etcd_events_cluster_setup: true
   etcd_events_cluster_enabled: true
+  ### 这部分定义数据目录路径，如果不需要定义数据目录的路径，可以直接将这几行注释掉（截止到下个注释），删除data_dir必须同时删除下面的几个配置
+  data_dir: /opt
+  etcd_data_dir: "{{ data_dir }}/lib/etcd"
+  kubelet_data_dir: "{{ data_dir }}/lib/kubelet"
+  containerd_storage_dir: "{{ data_dir }}/lib/containerd"
+  containerd_state_dir: "{{ data_dir }}/run/containerd"
+  pods_log_dir: "{{ data_dir }}/log/pods"
+  ###数据目录#####
+
 
 # Cluster nodes inventory info
 inventory:
