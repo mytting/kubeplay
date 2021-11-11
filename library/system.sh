@@ -19,6 +19,7 @@ system::fedora::disable_selinux(){
 system::centos::config_repo(){
   infolog "Updated the yum repo file"
   yum clean -q all || true
+  find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   cp -f ${RESOURCES_NGINX_DIR}/repos/CentOS-7-All-in-One.repo /etc/yum.repos.d/offline-resources.repo
   sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}#g" /etc/yum.repos.d/offline-resources.repo
   if yum makecache -q > /dev/null; then
@@ -29,6 +30,7 @@ system::centos::config_repo(){
 system::fedora::config_repo(){
   infolog "Updated the yum repo file"
   yum clean -q all || true
+  find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   cp -f ${RESOURCES_NGINX_DIR}/repos/CentOS-7-All-in-One.repo /etc/yum.repos.d/offline-resources.repo
   sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}#g" /etc/yum.repos.d/offline-resources.repo
   if yum makecache -q > /dev/null; then
@@ -38,6 +40,7 @@ system::fedora::config_repo(){
 
 system::debian::config_repo(){
   infolog "Update the apt list file"
+  find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   echo "deb [trusted=yes] file://${RESOURCES_NGINX_DIR}/debian/${ARCH} ${VERSION_CODENAME}/" \
         > /etc/apt/sources.list.d/offline-resources.list
   if apt-get update -qq > /dev/null; then
@@ -47,6 +50,7 @@ system::debian::config_repo(){
 
 system::ubuntu::config_repo(){
   infolog "Updated the apt list file"
+  find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   echo "deb [trusted=yes] file://${RESOURCES_NGINX_DIR}/ubuntu/${ARCH} ${VERSION_CODENAME}/" \
         > /etc/apt/sources.list.d/offline-resources.list
   if apt-get update -qq > /dev/null; then
