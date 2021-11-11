@@ -8,7 +8,7 @@ compose:
   registry_https_port: 8081
 
 kubespray:
-  # Kubernetes version by default, only support v1.20.6
+  # Kubernetes version by default, only support v1.21.5
   kube_version: v1.21.5
   # For deploy HA cluster you must configure a external apiserver access ip
   ##自定义apiserver证书的扩展IP地址和域名，列表
@@ -49,10 +49,10 @@ inventory:
       # ansible_ssh_private_key_file: /kubespray/config/id_rsa
     hosts:
       node1:
-        ### 注意 一定要是IP地址，不可以写域名
+        ### 注意 一定要是系统内的IP地址，不可以写域名和VPCIP、NAT IP等，如果确实有需要配置VPC IP或者NAT IP，就要配置k8s_cluster_used_ip为系统内的IP
         ansible_host: 172.20.0.21
         ## k8s集群的各组件/etcd/网络插件使用的IP地址，默认为ansible_host，如果需要自定义单个节点的IP，就打开取消下面的注释，定义IP地址
-        ### 注意 一定要是IP地址，不可以写域名
+        ### 注意 一定要是系统内的IP地址，不可以写域名和VPC IP、NAT IP等
         ## k8s_cluster_used_ip: 192.168.1.1
       node2:
         ### 注意 一定要是IP地址，不可以写域名

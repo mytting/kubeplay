@@ -9,7 +9,7 @@ services:
     network_mode: host
     volumes:
       - ./resources/nginx:/usr/share/nginx
-      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./config/kubeplay-nginx.conf:/etc/nginx/conf.d/default.conf
 
   kubeplay-registry:
     image: registry:2.7.1
@@ -18,6 +18,19 @@ services:
     network_mode: host
     volumes:
       - ./resources/registry:/var/lib/registry
-      - ./config/registry.yaml:/etc/docker/registry/config.yml
+      - ./config/kubeplay-registry.yaml:/etc/docker/registry/config.yml
       - ./config/certs/domain.crt:/etc/docker/registry/domain.crt
       - ./config/certs/domain.key:/etc/docker/registry/domain.key
+
+####可以取消注释下面的这段，让deepflow-registry可信任，不需要配置containerd的配置文件添加非安全仓库，镜像仓库需要使用config.yaml文件中的域名来访问
+####deepflow-registry的端口默认是5000，可以修改config/deepflow-registry.yaml文件来配置端口
+  # deepflow-registry:
+  #   image: registry:2.7.1
+  #   container_name: deepflow-registry
+  #   restart: always
+  #   network_mode: host
+  #   volumes:
+  #     - /usr/local/deepflow/registry:/var/lib/registry
+  #     - ./config/deepflow-registry.yaml:/etc/docker/registry/config.yml
+  #     - ./config/certs/domain.crt:/etc/docker/registry/domain.crt
+  #     - ./config/certs/domain.key:/etc/docker/registry/domain.key
