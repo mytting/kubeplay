@@ -9,7 +9,7 @@ services:
     network_mode: host
     volumes:
       - ./resources/nginx:/usr/share/nginx
-      - ./config/kubeplay-nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
 
   kubeplay-registry:
     image: registry:2.7.1
@@ -18,7 +18,7 @@ services:
     network_mode: host
     volumes:
       - ./resources/registry:/var/lib/registry
-      - ./config/kubeplay-registry.yaml:/etc/docker/registry/config.yml
+      - ./config/registry.yaml:/etc/docker/registry/config.yml
       - ./config/certs/domain.crt:/etc/docker/registry/domain.crt
       - ./config/certs/domain.key:/etc/docker/registry/domain.key
 
