@@ -29,6 +29,7 @@ kubespray:
   ### 这部分定义数据目录路径，如果不需要定义数据目录的路径，可以直接将这几行注释掉（截止到下个注释），删除data_dir必须同时删除下面的几个配置
   data_dir: /opt
   etcd_data_dir: "{{ data_dir }}/lib/etcd"
+  etcd_events_data_dir: "{{ data_dir }}/lib/etcd-events"
   kubelet_data_dir: "{{ data_dir }}/lib/kubelet"
   containerd_storage_dir: "{{ data_dir }}/lib/containerd"
   containerd_state_dir: "{{ data_dir }}/run/containerd"
