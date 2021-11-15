@@ -90,6 +90,8 @@ inventory:
       calico_rr:
         hosts: {}
 
+
+### default下的参数一般不需要手动配置，脚本会自动配置
 ### Default parameters ###
 ## This filed not need config, will auto update,
 ## if no special requirement, do not modify these parameters.
