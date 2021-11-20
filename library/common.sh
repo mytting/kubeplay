@@ -64,12 +64,9 @@ common::install_tools(){
   DATA_DIR=$(yq  eval '.kubespray.data_dir' ${CONFIG_FILE})
   if [[ "${DATA_DIR}" == "null" ]]; then
     CONTAINERD_ROOT_DIR="/var/lib/containerd"
-    CONTAINERD_STATE_DIR="/run/containerd"
   else
     CONTAINERD_YAML_ROOT_DIR=$(yq  eval '.kubespray.containerd_storage_dir' ${CONFIG_FILE})
-    CONTAINERD_YAML_STATE_DIR=$(yq  eval '.kubespray.containerd_state_dir' ${CONFIG_FILE})
     CONTAINERD_ROOT_DIR=${DATA_DIR}${CONTAINERD_YAML_ROOT_DIR##*\}\}}
-    CONTAINERD_STATE_DIR=${DATA_DIR}${CONTAINERD_YAML_STATE_DIR##*\}\}}
     REGISTRY_DOMAIN=$(yq -e eval '.default.registry_domain' ${CONFIG_FILE})
     if [[ ${REGISTRY_DOMAIN} == "imagerepo_domain:registry_https_port" ]]; then
       IMAGEREPO_DOMAIN=$(yq eval '.compose.imagerepo_domain' ${CONFIG_FILE}) 
@@ -79,7 +76,6 @@ common::install_tools(){
   fi
   /bin/cp -f ${CONTAINERD_CONFIG_FILE} /etc/containerd/config.toml
   sed -i "s|CONTAINERD_ROOT_DIR|${CONTAINERD_ROOT_DIR}|g"   /etc/containerd/config.toml
-  sed -i "s|CONTAINERD_STATE_DIR|${CONTAINERD_STATE_DIR}|g" /etc/containerd/config.toml
   sed -i "s|REGISTRY_DOMAIN|${REGISTRY_DOMAIN}|g"           /etc/containerd/config.toml
   systemctl enable buildkit containerd
   systemctl restart buildkit containerd

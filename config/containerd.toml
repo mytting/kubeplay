@@ -1,6 +1,6 @@
 version = 2
 root = "CONTAINERD_ROOT_DIR"
-state = "CONTAINERD_STATE_DIR"
+state = "/run/containerd"
 oom_score = 0
 
 [grpc]
