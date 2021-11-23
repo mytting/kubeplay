@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DEFAULT_ARCH=amd64
-DEFAULT_URL="http://127.0.0.1:8080"
+DEFAULT_URL="http://127.0.0.1:8080/centos"
 COMMON_PKGS="curl vim bash-completion rsync ca-certificates chrony wget"
 
 system::centos::disable_selinux(){
@@ -21,10 +21,11 @@ system::centos::config_repo(){
   yum clean -q all || true
   find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   cp -f ${RESOURCES_NGINX_DIR}/repos/CentOS-7-All-in-One.repo /etc/yum.repos.d/offline-resources.repo
-  sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}#g" /etc/yum.repos.d/offline-resources.repo
+  sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}/centos#g" /etc/yum.repos.d/offline-resources.repo
   if yum makecache -q > /dev/null; then
     infolog "Updated the repo file successfully"
   fi
+  yum install -q -y containerd.io*
 }
 
 system::fedora::config_repo(){
@@ -32,10 +33,11 @@ system::fedora::config_repo(){
   yum clean -q all || true
   find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   cp -f ${RESOURCES_NGINX_DIR}/repos/CentOS-7-All-in-One.repo /etc/yum.repos.d/offline-resources.repo
-  sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}#g" /etc/yum.repos.d/offline-resources.repo
+  sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}/fedora#g" /etc/yum.repos.d/offline-resources.repo
   if yum makecache -q > /dev/null; then
     infolog "Updated the repo file successfully"
   fi
+  yum install -q -y containerd.io*
 }
 
 system::debian::config_repo(){
@@ -46,6 +48,7 @@ system::debian::config_repo(){
   if apt-get update -qq > /dev/null; then
     infolog "Updated the repo file successfully"
   fi
+  apt-get install -qq -y containerd.io=1.4.9-1  > /dev/null
 }
 
 system::ubuntu::config_repo(){
@@ -56,6 +59,7 @@ system::ubuntu::config_repo(){
   if apt-get update -qq > /dev/null; then
     infolog "Updated the repo file successfully"
   fi
+  apt-get install -qq -y containerd.io=1.4.9-1  > /dev/null
 }
 
 system::disable_firewalld(){
