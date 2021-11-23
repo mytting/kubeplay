@@ -58,7 +58,7 @@ common::install_tools(){
   chmod a+x ${USR_BIN_PATH}/{kubectl,helm,yq,mkcert,skopeo}
 
   # Install containerd and buildkit
-  local nerdctl_tar_file=$(find ${RESOURCES_NGINX_DIR}/tools -type f -name "nerdctl-full-*-linux-${ARCH}.tar.gz" | sort -r --version-sort | head -n1)
+  local nerdctl_tar_file=$(find ${RESOURCES_NGINX_DIR}/tools -type f -name "nerdctl-*-linux-${ARCH}.tar.gz" | sort -r --version-sort | head -n1)
   tar -xf ${nerdctl_tar_file} -C /usr/local
   mkdir -p /etc/containerd
   DATA_DIR=$(yq  eval '.kubespray.data_dir' ${CONFIG_FILE})

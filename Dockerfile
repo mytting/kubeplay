@@ -1,7 +1,7 @@
 FROM alpine:latest as downloader
 ARG SKOPEO_VERSION=v1.4.1
 ARG YQ_VERSION=v4.11.2
-ARG NERDCTL_VERSION=0.11.0
+ARG NERDCTL_VERSION=0.14.0
 ARG NGINX_VERSION=1.20-alpine
 ARG RERGISRRY_VERSION=2.7.1
 ARG MKCERT_VERSION=v1.4.3-patch-1.0
@@ -17,7 +17,7 @@ RUN ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') \
     && wget -q -k https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_${ARCH}  -O /tools/yq-linux-${ARCH} \
     && wget -q -k https://github.com/k8sli/skopeo/releases/download/${SKOPEO_VERSION}/skopeo-linux-${ARCH} -O /tools/skopeo-linux-${ARCH} \
     && wget -q -k https://github.com/k8sli/mkcert/releases/download/${MKCERT_VERSION}/mkcert-${MKCERT_VERSION}-linux-${ARCH} -O /tools/mkcert-linux-${ARCH} \
-    && wget -q -k https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-full-${NERDCTL_VERSION}-linux-${ARCH}.tar.gz \
+    && wget -q -k https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCH}.tar.gz \
     && chmod a+x /tools/* \
     && ln -s /tools/skopeo-linux-${ARCH} /usr/bin/skopeo
 
