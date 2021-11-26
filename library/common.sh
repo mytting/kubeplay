@@ -60,9 +60,9 @@ common::install_tools(){
   # Install containerd and buildkit
   local nerdctl_tar_file=$(find ${RESOURCES_NGINX_DIR}/tools -type f -name "nerdctl-*-linux-${ARCH}.tar.gz" | sort -r --version-sort | head -n1)
   tar -xf ${nerdctl_tar_file} -C /usr/local/bin/
-  local cni-plugins_tar_file=$(find ${RESOURCES_NGINX_DIR}/ -type f -name "cni-plugins-linux-${ARCH}-*.tgz" | sort -r --version-sort | head -n1)
+  local cni_plugins_tar_file=$(find ${RESOURCES_NGINX_DIR}/ -type f -name "cni-plugins-linux-${ARCH}-*.tgz" | sort -r --version-sort | head -n1)
   mkdir -p /opt/cni/bin/
-  tar -xf ${ni-plugins_tar_file} -C /opt/cni/bin/
+  tar -xf ${cni_plugins_tar_file} -C /opt/cni/bin/
   mkdir -p /etc/containerd
   DATA_DIR=$(yq  eval '.kubespray.data_dir' ${CONFIG_FILE})
   if [[ "${DATA_DIR}" == "null" ]]; then
