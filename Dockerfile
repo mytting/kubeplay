@@ -6,17 +6,17 @@ ARG NGINX_VERSION=1.20-alpine
 ARG RERGISRRY_VERSION=2.7.1
 ARG MKCERT_VERSION=v1.4.3-patch-1.0
 ARG KUBESPRAY_VERSION=latest
-ARG KUBESPRAY_IMAGE=ghcr.io/k8sli/kubespray
-ARG KUBESPRAY_FILES_IMAGE=ghcr.io/mytting/kubespray-files
-ARG KUBESPRAY_IMAGES_IMAGE=ghcr.io/mytting/kubespray-images
+ARG KUBESPRAY_IMAGE=ghcr.io/deepflow-kubeplay/kubespray
+ARG KUBESPRAY_FILES_IMAGE=ghcr.io/deepflow-kubeplay/kubespray-files
+ARG KUBESPRAY_IMAGES_IMAGE=ghcr.io/deepflow-kubeplay/kubespray-images
 ARG KUBESPRAY_REPO_TAG=latest
 
 WORKDIR /tools
 RUN ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') \
     && apk --no-cache add wget ca-certificates \
     && wget -q -k https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_${ARCH}  -O /tools/yq-linux-${ARCH} \
-    && wget -q -k https://github.com/mytting/skopeo/releases/download/${SKOPEO_VERSION}/skopeo-linux-${ARCH} -O /tools/skopeo-linux-${ARCH} \
-    && wget -q -k https://github.com/deepflow-kubeplay/mkcert/releases/download/${MKCERT_VERSION}/mkcert-${MKCERT_VERSION}-linux-${ARCH} -O /tools/mkcert-linux-${ARCH} \
+    && wget -q -k https://github.com/deepflow-kubeplay/skopeo/releases/download/${SKOPEO_VERSION}/skopeo-linux-${ARCH} -O /tools/skopeo-linux-${ARCH} \
+    && wget -q -k https://github.com/k8sli/mkcert/releases/download/${MKCERT_VERSION}/mkcert-${MKCERT_VERSION}-linux-${ARCH} -O /tools/mkcert-linux-${ARCH} \
     && wget -q -k https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCH}.tar.gz \
     && chmod a+x /tools/* \
     && ln -s /tools/skopeo-linux-${ARCH} /usr/bin/skopeo
