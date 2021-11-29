@@ -32,7 +32,7 @@ kubespray:
   etcd_events_data_dir: "{{ data_dir }}/lib/etcd-events"
   kubelet_data_dir: "{{ data_dir }}/lib/kubelet"
   containerd_storage_dir: "{{ data_dir }}/lib/containerd"
-  pods_log_dir: "{{ data_dir }}/log/pods"
+  pods_log_dir: "{{ data_dir }}/pod_log/pods"
   ###目前暂时不支持containerd的数据目录不加{{data_dir}}
   ### 建议数据盘挂载到/opt下，kubelet和contaienrd都使用同一个分区，不然ephemeral-storage limit功能无法使用
   ###数据目录#####
