@@ -2,7 +2,7 @@
 name: Build kubeplay packages
 
 on:
-  push:
+  pull_request:
     tags:
       - 'v*'
       - 'rc-*'
@@ -158,12 +158,3 @@ jobs:
           tar -I pigz -cf ${{ matrix.package_name }}-${{ env.IMAGE_TAG }}-${{ matrix.name }}-arm64.tar.gz kubeplay --remove-files
           sha256sum ${{ matrix.package_name }}-${{ env.IMAGE_TAG }}-${{ matrix.name }}-{amd64,arm64}.tar.gz > ${{ matrix.package_name }}-${{ env.IMAGE_TAG }}-${{ matrix.name }}.sha256sum.txt
 
-      - name: Release and upload packages
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: |
-            ${{ matrix.package_name }}-${{ env.IMAGE_TAG }}-${{ matrix.name }}.sha256sum.txt
-            ${{ matrix.package_name }}-${{ env.IMAGE_TAG }}-${{ matrix.name }}-amd64.tar.gz
-            ${{ matrix.package_name }}-${{ env.IMAGE_TAG }}-${{ matrix.name }}-arm64.tar.gz
