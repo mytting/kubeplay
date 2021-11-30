@@ -1,5 +1,5 @@
 ---
-name: Build kubeplay packages
+name: Pull Request  build test
 
 on:
   pull_request:
