@@ -32,6 +32,8 @@ kubespray:
   etcd_events_data_dir: "{{ data_dir }}/lib/etcd-events"
   kubelet_data_dir: "{{ data_dir }}/lib/kubelet"
   containerd_storage_dir: "{{ data_dir }}/lib/containerd"
+  ###支持删除pods_log_dir配置，删除该配置 默认的pod 日志目录为/var/log/pods, 一般建议将pod的日志目录放到数据盘下，删除该目录建议用在以下场景中
+  ###- /var/log目录本身就是数据盘目录到/var/log的软连接，也就是本身/var/log目录已经为升级盘了，该场景可以删掉此配置避免软连接出问题
   pods_log_dir: "{{ data_dir }}/pod_log/pods"
   ###目前暂时不支持containerd的数据目录不加{{data_dir}}
   ### 建议数据盘挂载到/opt下，kubelet和contaienrd都使用同一个分区，不然ephemeral-storage limit功能无法使用
