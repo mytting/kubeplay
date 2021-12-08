@@ -10,6 +10,9 @@ compose:
 kubespray:
   # Kubernetes version by default, only support v1.21.5
   kube_version: v1.21.5
+  #### k8s的service和pod的网段，如果和物理网络等有冲突，可通过修改如下变量配servcie和pod的网段
+  kube_service_addresses: 10.233.0.0/18
+  kube_pods_subnet: 10.233.64.0/18
   # For deploy HA cluster you must configure a external apiserver access ip
   ##自定义apiserver证书的扩展IP地址和域名，列表
   external_apiserver_access_ip:
