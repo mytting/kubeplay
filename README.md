@@ -1,13 +1,13 @@
 # kubeplay
 
-[![Build kubeplay packages](https://github.com/k8sli/kubeplay/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/k8sli/kubeplay/actions/workflows/build.yaml)
-![GitHub All Releases](https://img.shields.io/github/downloads/k8sli/kubeplay/total)
+[![Build kubeplay packages](https://github.com/deepflow-kubeplay/kubeplay/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/deepflow-kubeplay/kubeplay/actions/workflows/build.yaml)
+![GitHub All Releases](https://img.shields.io/github/downloads/deepflow-kubeplay/kubeplay/total)
 
 > English | [简体中文](./README_zh-CN.md)
 
 ## Introduction
 
-[kubeplay](https://github.com/k8sli/kubeplay) is a tool for offline deployment of kuberneres clusters based on [kubespray](https://github.com/k8sli/kubespray).
+[kubeplay](https://github.com/deepflow-kubeplay/kubeplay) is a tool for offline deployment of kuberneres clusters based on [kubespray](https://github.com/deepflow-kubeplay/kubespray).
 
 ### Feature
 
@@ -65,7 +65,7 @@ Using [kubespray](https://github.com/kubernetes-sigs/kubespray) which come from 
 
 ### Download
 
-You can download the package matching your platform from the releases page [k8sli/kubeplay/releases](https://github.com/k8sli/kubeplay/releases) on GitHub, then copy it to deploy node.
+You can download the package matching your platform from the releases page [deepflow-kubeplay/kubeplay/releases](https://github.com/deepflow-kubeplay/kubeplay/releases) on GitHub, then copy it to deploy node.
 
 ```bash
 kubeplay-v0.1.0-alpha.3-centos-7.sha256sum.txt # checksum file

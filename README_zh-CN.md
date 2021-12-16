@@ -1,6 +1,6 @@
 ## 简介
 
-[kubeplay](https://github.com/k8sli/kubeplay) 是基于 [kubespray](https://github.com/k8sli/kubespray) 实现的离线部署 kuberneres 集群的工具
+[kubeplay](https://github.com/deepflow-kubeplay/kubeplay) 是基于 [kubespray](https://github.com/deepflow-kubeplay/kubespray) 实现的离线部署 kuberneres 集群的工具
 
 ### 特性
 
@@ -55,7 +55,7 @@
 
 ### 下载
 
-在 GitHub 的 release 页面 [k8sli/kubeplay/releases](https://github.com/k8sli/kubeplay/releases)，根据部署机器的 Linux 发行版和 CPU 架构选择相应的安装包，将它下载到部署节点。
+在 GitHub 的 release 页面 [deepflow-kubeplay/kubeplay/releases](https://github.com/deepflow-kubeplay/kubeplay/releases)，根据部署机器的 Linux 发行版和 CPU 架构选择相应的安装包，将它下载到部署节点。
 
 ```bash
 kubeplay-v0.1.0-alpha.3-centos-7.sha256sum.txt # 安装包 sha256sum 校验文件
