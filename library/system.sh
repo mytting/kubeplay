@@ -22,6 +22,9 @@ system::centos::config_repo(){
   find /etc -type f -name '*.repo' -o -name '*.list' | grep -E '/etc/yum.repos.d/|/etc/apt/' | xargs -L1 -I % mv % %.bak || true
   cp -f ${RESOURCES_NGINX_DIR}/repos/CentOS-7-All-in-One.repo /etc/yum.repos.d/offline-resources.repo
   sed -i "s#${DEFAULT_URL}#file://${RESOURCES_NGINX_DIR}/centos#g" /etc/yum.repos.d/offline-resources.repo
+  if [ "${ID}" = "rhel" ]; then
+    sed -i 's|$releasever|7|g' /etc/yum.repos.d/offline-resources.repo
+  fi
   if yum makecache -q > /dev/null; then
     infolog "Updated the repo file successfully"
   fi

@@ -54,7 +54,7 @@ deploy_compose(){
     Debian|debian)
       system::debian::config_repo
       ;;
-    CentOS|centos)
+    CentOS|centos|rhel)
       system::centos::disable_selinux
       system::centos::config_repo
       ;;
