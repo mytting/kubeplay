@@ -4,6 +4,7 @@
 # Set logging colors
 #
 
+set +e
 NORMAL_COL=$(tput sgr0)
 RED_COL=$(tput setaf 1)
 WHITE_COL=$(tput setaf 7)
@@ -14,6 +15,7 @@ debuglog(){ printf "${WHITE_COL}%s${NORMAL_COL}\n" "$@"; }
 infolog(){ printf "${GREEN_COL}✔ %s${NORMAL_COL}\n" "$@"; }
 warnlog(){ printf "${YELLOW_COL}➜ %s${NORMAL_COL}\n" "$@"; }
 errorlog(){ printf "${RED_COL}✖ %s${NORMAL_COL}\n" "$@"; }
+set -e
 
 common::usage(){
   cat <<EOF
